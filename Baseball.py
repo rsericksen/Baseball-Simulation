@@ -32,7 +32,9 @@ secondBase = False;
 thirdBase = False;
 
 while (inning<=9 or nyyScore==balScore):
+	print "-------------------------------------------";
 	print "Top of Inning "+str(inning);
+	print "-------------------------------------------";
 	while (outs<3):
 		print nyyPlayerName[batter]+" is up at bat.";
 		x = randrange(0,100);
@@ -46,6 +48,7 @@ while (inning<=9 or nyyScore==balScore):
 					thirdBase = False;
 					print "Yankees Score!";
 					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+					print "\n";
 
 				if secondBase:
 					thirdBase = True;
@@ -65,6 +68,7 @@ while (inning<=9 or nyyScore==balScore):
                                         thirdBase = False;
 					print "Yankees Score!";
 					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+					print "\n";
 
                                 if secondBase:
                                         nyyScore +=1;
@@ -72,6 +76,7 @@ while (inning<=9 or nyyScore==balScore):
                                         secondBase = False;
 					print "Yankees Score!";
 					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+					print "\n";
 
                                 if firstBase:
                                         thirdBase = True;
@@ -87,6 +92,7 @@ while (inning<=9 or nyyScore==balScore):
                                         thirdBase = False;
 					print "Yankees Score!";
 					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+					print "\n";
 
                                 if secondBase:
                                         nyyScore += 1;
@@ -94,6 +100,7 @@ while (inning<=9 or nyyScore==balScore):
 					secondBase = False;
 					print "Yankees Score!";
 					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+					print "\n";
 
                                 if firstBase:
                                         nyyScore += 1;
@@ -101,6 +108,7 @@ while (inning<=9 or nyyScore==balScore):
                                         firstBase = False;
 					print "Yankees Score!";
 					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+					print "\n";
 
 				onBase += 1;
 				thirdBase = True;
@@ -113,11 +121,13 @@ while (inning<=9 or nyyScore==balScore):
 				onBase = 0;
 				print "Yankees Score!";
 				print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-	
+				print "\n";
+
 		else:
 			outs += 1;
 			print nyyPlayerName[batter]+" is out.";
 			print str(outs)+" outs.";
+			print "\n";
 
 		batter += 1;
 		if (batter == 8):
@@ -131,8 +141,10 @@ while (inning<=9 or nyyScore==balScore):
 	outs = 0;	
 
 	print "\n";
+	print "-------------------------------------------";
 	print "Bottom of Inning "+str(inning);
-	
+	print "-------------------------------------------";	
+
 	while (outs<3):
 		print balPlayerName[batter]+" is up at bat.";
 		x = randrange(0,100);
@@ -146,6 +158,7 @@ while (inning<=9 or nyyScore==balScore):
                                         thirdBase = False;
 					print "Orioles Score!";
 					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+					print "\n";
 
                                 if secondBase:
                                         thirdBase = True;
@@ -165,6 +178,7 @@ while (inning<=9 or nyyScore==balScore):
                                         thirdBase = False;
 					print "Orioles Score!";
 					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+					print "\n";
 
                                 if secondBase:
                                         balScore +=1;
@@ -172,6 +186,7 @@ while (inning<=9 or nyyScore==balScore):
                                         secondBase = False;
 					print "Orioles Score!";
 					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+					print "\n";
 
                                 if firstBase:
                                         thirdBase = True;
@@ -187,6 +202,7 @@ while (inning<=9 or nyyScore==balScore):
                                         thirdBase = False;
 					print "Orioles Score!";
 					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+					print "\n";
 
                                 if secondBase:
                                         balScore += 1;
@@ -194,6 +210,7 @@ while (inning<=9 or nyyScore==balScore):
                                         secondBase = False;
 					print "Orioles Score!";
 					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+					print "\n";
 
                                 if firstBase:
                                         balScore += 1;
@@ -201,6 +218,7 @@ while (inning<=9 or nyyScore==balScore):
                                         firstBase = False;
 					print "Orioles Score!";
 					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+					print "\n";
 
                                 onBase += 1;
                                 thirdBase = True;
@@ -213,11 +231,13 @@ while (inning<=9 or nyyScore==balScore):
                                 onBase = 0;
 				print "Orioles Score!";
 				print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
+				print "\n";
 
                 else:
                         outs += 1;
 			print balPlayerName[batter]+" is out.";
 			print str(outs)+" outs.";
+			print "\n";
 
 		batter += 1;
                 if (batter == 8):
@@ -232,6 +252,7 @@ while (inning<=9 or nyyScore==balScore):
 	outs = 0;
 
 	print "\n";
-
+print "-------------------------------------------";
 print "After "+str(inning-1)+" Innings";
 print "Yankees: "+str(nyyScore)+"     "+ "Orioles: "+str(balScore);
+print "-------------------------------------------";
