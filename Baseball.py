@@ -42,6 +42,8 @@ while (inning<=9 or nyyScore==balScore):
 			x = randrange(0,100)
 
 			if (x<nyySingle[batter]*100):
+				print nyyPlayerName[batter]+" hit a single.";
+                                print "\n";
 				if thirdBase:
 					nyyScore += 1;
 					onBase -= 1;
@@ -62,6 +64,8 @@ while (inning<=9 or nyyScore==balScore):
 				firstBase = True;
 
 			elif ((x>=nyySingle[batter]*100) and (x<getDouble(nyySingle,nyyDouble,batter))):
+				print nyyPlayerName[batter]+" hit a double.";
+                                print "\n";
 				if thirdBase:
                                         nyyScore += 1;
                                         onBase -= 1;
@@ -86,6 +90,9 @@ while (inning<=9 or nyyScore==balScore):
 				secondBase = True;
 
 			elif ((x>=getDouble(nyySingle,nyyDouble,batter)) and (x<getTriple(nyySingle,nyyDouble,nyyTriple,batter))):
+				print nyyPlayerName[batter]+" hit a triple.";
+                                print "\n";
+
 				if thirdBase:
                                         nyyScore += 1;
                                         onBase -= 1;
@@ -113,7 +120,9 @@ while (inning<=9 or nyyScore==balScore):
 				onBase += 1;
 				thirdBase = True;
 
-			elif ((x>=getTriple(nyySingle,nyyDouble,nyyTriple,batter)) and (x<=100)):
+			elif ((x>=getTriple(nyySingle,nyyDouble,nyyTriple,batter))):
+				print nyyPlayerName[batter]+" hit a home run.";
+                                print "\n";
 				nyyScore += (onBase+1);
 				firstBase = False;
 				secondBase = False;
@@ -152,7 +161,9 @@ while (inning<=9 or nyyScore==balScore):
                         x = randrange(0,100)
 
                         if (x<balSingle[batter]*100):
-                                if thirdBase:
+                                print balPlayerName[batter]+" hit a single.";
+                                print "\n";
+				if thirdBase:
                                         balScore += 1;
                                         onBase -= 1;
                                         thirdBase = False;
@@ -172,7 +183,9 @@ while (inning<=9 or nyyScore==balScore):
                                 firstBase = True;
 
 		elif ((x>=balSingle[batter]*100) and (x<getDouble(balSingle,balDouble,batter))):
-                                if thirdBase:
+                                print balPlayerName[batter]+" hit a double.";
+                                print "\n";
+				if thirdBase:
                                         balScore += 1;
                                         onBase -= 1;
                                         thirdBase = False;
@@ -196,7 +209,9 @@ while (inning<=9 or nyyScore==balScore):
                                 secondBase = True;
 
 		elif ((x>=getDouble(balSingle,balDouble,batter)) and (x<getTriple(balSingle,balDouble,balTriple,batter))):
-                                if thirdBase:
+                                print balPlayerName[batter]+" hit a triple.";
+                                print "\n";
+				if thirdBase:
                                         balScore += 1;
                                         onBase -= 1;
                                         thirdBase = False;
@@ -223,8 +238,10 @@ while (inning<=9 or nyyScore==balScore):
                                 onBase += 1;
                                 thirdBase = True;
 
-		elif ((x>=getTriple(balSingle,balDouble,balTriple,batter)) and (x<=100)):
-                                balScore += (onBase+1);
+		elif ((x>=getTriple(balSingle,balDouble,balTriple,batter))):
+                                print balPlayerName[batter]+" hit a home run.";
+                                print "\n";
+				balScore += (onBase+1);
                                 firstBase = False;
                                 secondBase = False;
                                 thirdBase = False;
