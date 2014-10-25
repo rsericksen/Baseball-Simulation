@@ -1,10 +1,153 @@
 from random import randrange
 
-def getDouble(single,double,batter):
+def GetHit(avg):
+	z = randrange(0,100);
+	if(z<=avg*100):
+		return True
+	return False
+
+#----------------------------------------------------------
+
+def GetSingleValue(single, batter):
+	return single[batter]*100
+
+#----------------------------------------------------------
+
+def HitSingle(onBase,score,firstBase,secondBase,thirdBase):
+        if thirdBase:
+                score += 1;
+                onBase -= 1;
+                thirdBase = False;
+                print "Score!";
+                print "\n";
+	if secondBase:
+                thirdBase = True;
+                secondBase = False;
+        if firstBase:
+                secondBase = True;
+                firstBase = False;
+        onBase += 1;
+        firstBase = True;
+	return onBase,score,firstBase,secondBase,thirdBase
+
+#----------------------------------------------------------
+
+def GetDoubleValue(single,double,batter):
 	return (single[batter]+double[batter])*100;
 
-def getTriple(single,double,triple,batter):
+#----------------------------------------------------------
+
+def HitDouble(onBase,score,firstBase,secondBase,thirdBase):
+	if thirdBase:
+        	score += 1;
+                onBase -= 1;
+                thirdBase = False;
+                print "Score!";
+                print "\n";
+	if secondBase:
+                score +=1;
+                onBase -= 1;
+                secondBase = False;
+                print "Score!";
+                print "\n";
+	if firstBase:
+                thirdBase = True;
+                firstBase = False;
+        onBase += 1;
+        secondBase = True;
+	return onBase,score,firstBase,secondBase,thirdBase
+
+#----------------------------------------------------------
+
+def GetTripleValue(single,double,triple,batter):
 	return (single[batter]+double[batter]+triple[batter])*100;
+
+#----------------------------------------------------------
+
+def HitTriple(onBase,score,firstBase,secondBase,thirdBase):
+	if thirdBase:
+        	score += 1;
+                onBase -= 1;
+                thirdBase = False;
+                print "Score!";
+                print "\n";
+	if secondBase:
+                score += 1;
+                onBase -= 1;
+                secondBase = False;
+                print "Score!";
+                print "\n";
+        if firstBase:
+                score += 1;
+                onBase -= 1;
+                firstBase = False;
+                print "Score!";
+                print "\n";
+        onBase += 1;
+        thirdBase = True;
+	return onBase,score,firstBase,secondBase,thirdBase
+
+#----------------------------------------------------------
+
+def HitHomeRun(onBase,score,firstBase,secondBase,thirdBase):
+	print score
+	print onBase
+	print "\n"
+
+	score = score+onBase+1
+        firstBase = False;
+        secondBase = False;
+        thirdBase = False;
+        onBase = 0;
+        print "Score!";
+        print "\n";
+	return onBase,score,firstBase,secondBase,thirdBase
+
+#----------------------------------------------------------
+
+def Inning(players,score,avg,single,double,triple):
+	x = 0
+	outs = 0
+	batter = 0
+	onBase = 0;
+	firstBase = False;
+        secondBase = False;
+        thirdBase = False;
+
+	while (outs<3):
+		print players[batter]+" is up at bat.";
+		if GetHit(avg[batter]):
+			x = randrange(0,100)
+			if x<GetSingleValue(single,batter):
+				print players[batter]+" hit a single.";
+                                print "\n";
+				onBase,score,firstBase,secondBase,thirdBase = HitSingle(onBase,score,firstBase,secondBase,thirdBase)
+
+			elif x>=GetSingleValue(single,batter) and x<GetDoubleValue(single,double,batter):
+				print players[batter]+" hit a double.";
+                                print "\n";
+				onBase,score,firstBase,secondBase,thirdBase = HitDouble(onBase,score,firstBase,secondBase,thirdBase)
+
+			elif x>=GetDoubleValue(nyySingle,nyyDouble,batter) and x<GetTripleValue(nyySingle,nyyDouble,nyyTriple,batter):
+				print nyyPlayerName[batter]+" hit a triple.";
+                                print "\n";
+				onBase,score,firstBase,secondBase,thirdBase = HitTriple(onBase,score,firstBase,secondBase,thirdBase)
+
+			elif ((x>=GetTripleValue(nyySingle,nyyDouble,nyyTriple,batter))):
+				print nyyPlayerName[batter]+" hit a home run.";
+                                print "\n";
+				onBase,score,firstBase,secondBase,thirdBase = HitHomeRun(onBase,score,firstBase,secondBase,thirdBase)
+		else:
+			outs += 1;
+			print players[batter]+" is out.";
+			print str(outs)+" outs.";
+			print "\n";
+		batter += 1;
+		if (batter == 8):
+			batter = 0;
+	return score
+
+#----------------------------------------------------------
 
 nyyPlayerName = ["Ellsbury","Jeter","Beltran","Teixeira","McCann","Gardner","Johnson","Suzuki"]
 balPlayerName = ["Markakis","Flaherty","Davis","Jones","Cruz","Hardy","Lough","Weeks"];
@@ -20,11 +163,8 @@ nyyHomeRun = [0.103,0.027,0.160,0.232,0.200,0.120,0.136,0.010];
 balHomeRun = [0.079,0.112,0.295,0.160,0.240,0.063,0.093,0.000];
 
 inning = 1;
-outs = 0;
 nyyScore = 0;
 balScore = 0;
-batter = 0;
-onBase = 0;
 x = 0;
 
 firstBase = False;
@@ -34,241 +174,17 @@ thirdBase = False;
 while (inning<=9 or nyyScore==balScore):
 	print "-------------------------------------------";
 	print "Top of Inning "+str(inning);
+	print "Yankees: "+str(nyyScore)+"     "+ "Orioles: "+str(balScore);
 	print "-------------------------------------------";
-	while (outs<3):
-		print nyyPlayerName[batter]+" is up at bat.";
-		x = randrange(0,100);
-		if(x<=nyyAvg[batter]*100):
-			x = randrange(0,100)
-
-			if (x<nyySingle[batter]*100):
-				print nyyPlayerName[batter]+" hit a single.";
-                                print "\n";
-				if thirdBase:
-					nyyScore += 1;
-					onBase -= 1;
-					thirdBase = False;
-					print "Yankees Score!";
-					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-					print "\n";
-
-				if secondBase:
-					thirdBase = True;
-					secondBase = False;
-
-				if firstBase:
-					secondBase = True;
-					firstBase = False;
-
-				onBase += 1;
-				firstBase = True;
-
-			elif ((x>=nyySingle[batter]*100) and (x<getDouble(nyySingle,nyyDouble,batter))):
-				print nyyPlayerName[batter]+" hit a double.";
-                                print "\n";
-				if thirdBase:
-                                        nyyScore += 1;
-                                        onBase -= 1;
-                                        thirdBase = False;
-					print "Yankees Score!";
-					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-					print "\n";
-
-                                if secondBase:
-                                        nyyScore +=1;
-					onBase -= 1;
-                                        secondBase = False;
-					print "Yankees Score!";
-					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-					print "\n";
-
-                                if firstBase:
-                                        thirdBase = True;
-                                        firstBase = False;
-
-				onBase += 1;
-				secondBase = True;
-
-			elif ((x>=getDouble(nyySingle,nyyDouble,batter)) and (x<getTriple(nyySingle,nyyDouble,nyyTriple,batter))):
-				print nyyPlayerName[batter]+" hit a triple.";
-                                print "\n";
-
-				if thirdBase:
-                                        nyyScore += 1;
-                                        onBase -= 1;
-                                        thirdBase = False;
-					print "Yankees Score!";
-					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-					print "\n";
-
-                                if secondBase:
-                                        nyyScore += 1;
-                                        onBase -= 1;
-					secondBase = False;
-					print "Yankees Score!";
-					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-					print "\n";
-
-                                if firstBase:
-                                        nyyScore += 1;
-					onBase -= 1;
-                                        firstBase = False;
-					print "Yankees Score!";
-					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-					print "\n";
-
-				onBase += 1;
-				thirdBase = True;
-
-			elif ((x>=getTriple(nyySingle,nyyDouble,nyyTriple,batter))):
-				print nyyPlayerName[batter]+" hit a home run.";
-                                print "\n";
-				nyyScore += (onBase+1);
-				firstBase = False;
-				secondBase = False;
-				thirdBase = False;
-				onBase = 0;
-				print "Yankees Score!";
-				print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-				print "\n";
-
-		else:
-			outs += 1;
-			print nyyPlayerName[batter]+" is out.";
-			print str(outs)+" outs.";
-			print "\n";
-
-		batter += 1;
-		if (batter == 8):
-			batter = 0;
-	
-	firstBase = False;
-        secondBase = False;
-        thirdBase = False;
-        onBase = 0;
-	batter = 0;
-	outs = 0;	
-
-	print "\n";
+	nyyScore = Inning(nyyPlayerName,nyyScore,nyyAvg,nyySingle,nyyDouble,nyyTriple)
 	print "-------------------------------------------";
 	print "Bottom of Inning "+str(inning);
+	print "Yankees: "+str(nyyScore)+"     "+ "Orioles: "+str(balScore);
 	print "-------------------------------------------";	
-
-	while (outs<3):
-		print balPlayerName[batter]+" is up at bat.";
-		x = randrange(0,100);
-                if(x<=balAvg[batter]*100):
-                        x = randrange(0,100)
-
-                        if (x<balSingle[batter]*100):
-                                print balPlayerName[batter]+" hit a single.";
-                                print "\n";
-				if thirdBase:
-                                        balScore += 1;
-                                        onBase -= 1;
-                                        thirdBase = False;
-					print "Orioles Score!";
-					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-					print "\n";
-
-                                if secondBase:
-                                        thirdBase = True;
-                                        secondBase = False;
-
-                                if firstBase:
-                                        secondBase = True;
-                                        firstBase = False;
-
-                                onBase += 1;
-                                firstBase = True;
-
-		elif ((x>=balSingle[batter]*100) and (x<getDouble(balSingle,balDouble,batter))):
-                                print balPlayerName[batter]+" hit a double.";
-                                print "\n";
-				if thirdBase:
-                                        balScore += 1;
-                                        onBase -= 1;
-                                        thirdBase = False;
-					print "Orioles Score!";
-					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-					print "\n";
-
-                                if secondBase:
-                                        balScore +=1;
-                                        onBase -= 1;
-                                        secondBase = False;
-					print "Orioles Score!";
-					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-					print "\n";
-
-                                if firstBase:
-                                        thirdBase = True;
-                                        firstBase = False;
-
-                                onBase += 1;
-                                secondBase = True;
-
-		elif ((x>=getDouble(balSingle,balDouble,batter)) and (x<getTriple(balSingle,balDouble,balTriple,batter))):
-                                print balPlayerName[batter]+" hit a triple.";
-                                print "\n";
-				if thirdBase:
-                                        balScore += 1;
-                                        onBase -= 1;
-                                        thirdBase = False;
-					print "Orioles Score!";
-					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-					print "\n";
-
-                                if secondBase:
-                                        balScore += 1;
-                                        onBase -= 1;
-                                        secondBase = False;
-					print "Orioles Score!";
-					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-					print "\n";
-
-                                if firstBase:
-                                        balScore += 1;
-                                        onBase -= 1;
-                                        firstBase = False;
-					print "Orioles Score!";
-					print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-					print "\n";
-
-                                onBase += 1;
-                                thirdBase = True;
-
-		elif ((x>=getTriple(balSingle,balDouble,balTriple,batter))):
-                                print balPlayerName[batter]+" hit a home run.";
-                                print "\n";
-				balScore += (onBase+1);
-                                firstBase = False;
-                                secondBase = False;
-                                thirdBase = False;
-                                onBase = 0;
-				print "Orioles Score!";
-				print "Yankees: "+str(nyyScore)+"     "+"Orioles: "+str(balScore);
-				print "\n";
-
-                else:
-                        outs += 1;
-			print balPlayerName[batter]+" is out.";
-			print str(outs)+" outs.";
-			print "\n";
-
-		batter += 1;
-                if (batter == 8):
-                        batter = 0;
-	
+	balScore = Inning(balPlayerName,balScore,balAvg,balSingle,balDouble,balTriple)
 	inning += 1;
-	firstBase = False;
-        secondBase = False;
-        thirdBase = False;
-        onBase = 0;
-	batter = 0;
-	outs = 0;
-
 	print "\n";
+
 print "-------------------------------------------";
 print "After "+str(inning-1)+" Innings";
 print "Yankees: "+str(nyyScore)+"     "+ "Orioles: "+str(balScore);
